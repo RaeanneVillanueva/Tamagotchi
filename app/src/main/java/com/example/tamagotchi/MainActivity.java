@@ -2,13 +2,13 @@ package com.example.tamagotchi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
     Player player = new Player();
-    Food food;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +25,16 @@ public class MainActivity extends AppCompatActivity {
         //go to start
     }
 
+
+
+    public void feed(View view){
+        //go to feedOptions
+        Intent intent = new Intent(this, FoodOptions.class);
+        startActivityForResult(intent, 1);
+    }
+
+    Food food;
+
     public void feedSnack(View view){
         food = new Food("Snack", 30);
         player.feed(food);
@@ -40,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         player.feed(food);
     }
 
-    public void feed(View view){
-        //go to feedOptions
+    public void feed(Food food){
+        Intent intent = new Intent();
     }
 
 }
