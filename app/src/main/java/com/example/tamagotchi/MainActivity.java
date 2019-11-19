@@ -8,7 +8,6 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    Player player = new Player();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,12 +15,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void start(View view){
-        player.setCurrPet(new Pet());
+        AppConstants.player.setCurrPet(new Pet());
         //go to main
     }
 
     public void release(View view){
-        player.release();
+        AppConstants.player.releasePet();
         //go to start
     }
 
@@ -37,17 +36,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void feedSnack(View view){
         food = new Food("Snack", 30);
-        player.feed(food);
+        AppConstants.player.feedPet(food);
     }
 
     public void feedMeal(View view){
         food = new Food("Meal", 60);
-        player.feed(food);
+        AppConstants.player.feedPet(food);
     }
 
     public void feedKingsizedMeal(View view){
         food = new Food("Kingsized Meal", 120);
-        player.feed(food);
+        AppConstants.player.feedPet(food);
     }
 
     public void feed(Food food){
