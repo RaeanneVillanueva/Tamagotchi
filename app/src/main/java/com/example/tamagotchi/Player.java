@@ -7,11 +7,11 @@ public class Player {
 
     }
 
-    public void release(){
+    public void releasePet(){
         currPet = null;
     }
 
-    public void feed(Food food){
+    public void feedPet(Food food){
         currPet.feed(food);
     }
 
