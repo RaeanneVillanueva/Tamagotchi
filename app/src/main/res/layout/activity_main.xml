@@ -1,18 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/label"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Hunger Meter"
+        android:gravity="center"
+        android:fontFamily="@font/cutie"
+        android:textSize="20dp"
+        android:padding="10dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ProgressBar
+        android:id="@+id/hungerMeter"
+        style="@style/myProgressBar"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:max="100"
+        android:maxHeight="20dp"
+        android:padding="10dp"
+        android:progress="100"
+        android:indeterminate="false"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp">
+
+        <ImageView
+            android:id="@+id/petView"
+            android:layout_width="350dp"
+            android:layout_height="400dp"
+            android:layout_gravity="center"
+            android:background="@drawable/andrew"
+            android:padding="20dp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_feed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/cutie"
+            android:text="Feed" />
+
+        <Button
+            android:id="@+id/btn_release"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/cutie"
+            android:text="Release" />
+    </LinearLayout>
+</LinearLayout>
