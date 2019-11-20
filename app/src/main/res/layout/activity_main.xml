@@ -39,8 +39,11 @@
             android:layout_width="350dp"
             android:layout_height="400dp"
             android:layout_gravity="center"
-            android:background="@drawable/andrew"
-            android:padding="20dp" />
+            android:adjustViewBounds="true"
+            android:background="@drawable/chili"
+            android:cropToPadding="false"
+            android:padding="20dp"
+            android:scaleType="fitCenter" />
     </FrameLayout>
 
     <LinearLayout
