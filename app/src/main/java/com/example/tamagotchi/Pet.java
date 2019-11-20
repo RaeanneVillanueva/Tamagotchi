@@ -26,6 +26,9 @@ public class Pet {
 
     public void setTimeUntilHungry(int timeUntilHungry) {
         this.timeUntilHungry = timeUntilHungry;
+        if(timeUntilHungry < 30){
+            petState = petState.HUNGRY;
+        }
         if (timeUntilHungry >= 30) {
             petState = PetState.FULL;
         }

@@ -8,7 +8,8 @@ public class Player {
     }
 
     public void releasePet(){
-        currPet = null;
+        if(currPet.isFull())
+            currPet = null;
     }
 
     public void feedPet(Food food){
@@ -23,5 +24,8 @@ public class Player {
         this.currPet = currPet;
     }
 
+    public boolean hasPet(){
+        return currPet != null;
+    }
 
 }

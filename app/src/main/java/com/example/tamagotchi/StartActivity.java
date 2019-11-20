@@ -13,13 +13,13 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         getSupportActionBar().hide();
+        AppConstants.init();
     }
 
     public void startGame(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
-
-        GameEngine gameEngine = new GameEngine();
     }
+
 }
