@@ -59,7 +59,7 @@ public class GameService extends Service {
         {
             i++;
             if(i == seconds) {
-                //NOTIFY!!
+                //NOTIFY!!!
                 //if hungry
                 notify(hungryNotification());
 
@@ -71,6 +71,9 @@ public class GameService extends Service {
         }
 
 
+        //functions for notify, it includes alarm, ringtone, and notification
+
+        //triggers the notification to pop up
         public void notify(Notification notification) {
             Intent intent = new Intent(context, GameBroadcastReceiver.class);
             intent.putExtra(GameBroadcastReceiver.NOTIFICATION, notification);
@@ -83,6 +86,7 @@ public class GameService extends Service {
                     + 5000, pendingIntent);
         }
 
+        //creates a notification if the pet is hungry
         public Notification hungryNotification() {
             Intent intent = new Intent(context, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(
@@ -98,6 +102,7 @@ public class GameService extends Service {
             return builder.build() ;
         }
 
+        //creates a notification when the pet escaped
         public Notification escapedNotification() {
             Intent intent = new Intent(context, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(
