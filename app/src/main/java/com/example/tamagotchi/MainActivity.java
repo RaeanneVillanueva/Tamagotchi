@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean bound;
     private GameService gameService;
     private Intent gameServiceIntent;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
