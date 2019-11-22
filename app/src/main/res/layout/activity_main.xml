@@ -28,9 +28,9 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/cutie"
             android:gravity="center"
-            android:padding="20dp"
+            android:padding="15dp"
             android:text="Hunger Meter"
-            android:textColor="#007b4a"
+            android:textColor="#1500ff"
             android:textSize="25dp" />
 
         <ProgressBar

@@ -13,6 +13,7 @@ public class FoodOptionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_options);
+        getSupportActionBar().hide();
     }
 
     public void feedSnack(View view){

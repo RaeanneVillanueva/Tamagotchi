@@ -29,6 +29,17 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cutie"
+                android:gravity="center"
+                android:padding="20dp"
+                android:text="Choose your pet's food!"
+                android:textColor="#1500ff"
+                android:textSize="25dp" />
+
             <Button
                 android:id="@+id/btn_feedMeal"
                 android:layout_width="wrap_content"
@@ -64,6 +75,7 @@
                 android:padding="20dp"
                 android:text="King Sized Meal"
                 android:textColor="@android:color/white" />
+
         </LinearLayout>
 
     </FrameLayout>

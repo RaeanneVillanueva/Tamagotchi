@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".StartActivity">
+    tools:context=".StartActivity"
+    android:background="@drawable/startbg">
 
     <TextView
         android:id="@+id/textView"
@@ -15,7 +16,8 @@
         android:fontFamily="@font/cutie"
         android:gravity="center"
         android:text="Tamagotchi!"
-        android:textSize="36sp" />
+        android:textColor="#1500ff"
+        android:textSize="40sp" />
 
     <Button
         android:id="@+id/button"
@@ -25,5 +27,6 @@
         android:onClick="startGame"
         android:background="@drawable/button_shape"
         android:textColor="@android:color/white"
-        android:text="Create New Pet" />
+        android:layout_margin="20dp"
+        android:text="Create New Pet!" />
 </LinearLayout>
