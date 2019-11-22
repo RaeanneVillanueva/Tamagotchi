@@ -107,7 +107,7 @@ public class GameService extends Service {
                     context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), pendingIntent);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, 0, pendingIntent);
         }
 
         //creates a notification if the pet is hungry
