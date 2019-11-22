@@ -39,6 +39,15 @@ public class MainActivity extends AppCompatActivity {
             bindService(gameServiceIntent, mConnection, BIND_AUTO_CREATE);
 
         startService(gameServiceIntent);
+
+        if(AppConstants.player.getCurrPet() == null){
+            Intent releaseIntent = new Intent(MainActivity.this, StartActivity.class );
+            startActivity(releaseIntent);
+            finish();
+        }
+
+        AppConstants.isStopped = false;
+
     }
 
     @Override
@@ -49,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
         stopService(gameServiceIntent);
 
         this.unregisterReceiver(receiver);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        AppConstants.isStopped = true;
     }
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -106,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             float percentage = (float) ((float) time / 120.0 * 100.0);
             hungerMeter.setProgress((int) percentage);
 
-           if(AppConstants.player.getCurrPet() == null){
+           if(AppConstants.player.getCurrPet() == null && !AppConstants.isStopped){
                 Intent releaseIntent = new Intent(MainActivity.this, StartActivity.class );
                 startActivity(releaseIntent);
                 finish();

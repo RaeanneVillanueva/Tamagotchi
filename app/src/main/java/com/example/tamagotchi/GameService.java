@@ -64,7 +64,7 @@ public class GameService extends Service {
 
 
     private class updateTask extends TimerTask {
-        private final static int escape = -120;
+        private final static int escape = -10;
         public updateTask(){
             super();
         }
@@ -73,26 +73,29 @@ public class GameService extends Service {
         int i = 0;
         @Override
         public void run(){
-            int seconds = AppConstants.player.getCurrPet().getTimeUntilHungry();
-            i++;
-            AppConstants.player.getCurrPet().setTimeUntilHungry(seconds - 1);
-            if(seconds == 0) {
-                Log.d("GAMESERVICE","PET IS HUNGRY");
-                notify(hungryNotification());
-            }else if(escape == seconds) {
-                Log.d("GAMESERVICE","PET ESCAPED");
-                AppConstants.player.setCurrPet(null);
-                notify(escapedNotification());
-                stopTimer();
-            }else{
-                    Log.d("GAMESERVICE","Time Left: " + seconds);
+            if( AppConstants.player.getCurrPet() != null){
+
+                int seconds = AppConstants.player.getCurrPet().getTimeUntilHungry();
+                i++;
+                AppConstants.player.getCurrPet().setTimeUntilHungry(seconds - 1);
+                if(seconds == 0) {
+                    Log.d("GAMESERVICE","PET IS HUNGRY");
+                    notify(hungryNotification());
+                }else if(escape == seconds) {
+                    Log.d("GAMESERVICE","PET ESCAPED");
+                    AppConstants.player.setCurrPet(null);
+                    notify(escapedNotification());
+                    stopTimer();
+                }else{
+                        Log.d("GAMESERVICE","Time Left: " + seconds);
+                }
+
+                Intent broadcastIntent = new Intent();
+                broadcastIntent.setAction("UPDATE PROGRESS BAR");
+                broadcastIntent.putExtra("TIMELEFT", seconds);
+                sendBroadcast(broadcastIntent);
+
             }
-
-            Intent broadcastIntent = new Intent();
-            broadcastIntent.setAction("UPDATE PROGRESS BAR");
-            broadcastIntent.putExtra("TIMELEFT", seconds);
-            sendBroadcast(broadcastIntent);
-
         }
 
 
@@ -107,7 +110,7 @@ public class GameService extends Service {
                     context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), pendingIntent);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, 0, pendingIntent);
         }
 
         //creates a notification if the pet is hungry
