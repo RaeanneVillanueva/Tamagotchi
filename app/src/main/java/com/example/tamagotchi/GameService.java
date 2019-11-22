@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
+import android.util.Log;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,13 +31,20 @@ public class GameService extends Service {
     @Override
     public void onCreate(){
         super.onCreate();
+        Log.d("GAMESERVICE", "onCreate()");
+        feed(AppConstants.player.getCurrPet().getTimeUntilHungry());
         context = this;
     }
 
 
-    public void startHunger(int seconds) {
+    public void feed(int seconds) {
         int updateInterval = 1000;
         timer.scheduleAtFixedRate(new updateTask(seconds), 0, updateInterval);
+    }
+
+    public void stopTimer(){
+        timer.cancel();
+        timer.purge();
     }
 
 
@@ -50,15 +55,16 @@ public class GameService extends Service {
             super();
             this.seconds = seconds;
         }
+
+
         int i = 0;
         @Override
-        public void run()
-        {
+        public void run(){
             i++;
             if(i == seconds) {
-                //NOTIF!!!
+                Log.d("GAMESERVICE","NOTIF");
             }else {
-                //time left
+                Log.d("GAMESERVICE","Time Left: " + (seconds - (i %seconds)));
             }
         }
     }

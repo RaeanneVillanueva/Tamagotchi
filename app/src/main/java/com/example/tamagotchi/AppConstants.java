@@ -10,6 +10,7 @@ public class AppConstants {
     public static void init(){
         gameEngine = new GameEngine();
         player = new Player();
+        player.setCurrPet(new Pet());
     }
 
     public static GameEngine getGameEngine(){

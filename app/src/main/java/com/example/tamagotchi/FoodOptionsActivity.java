@@ -7,7 +7,7 @@ import android.view.View;
 
 public class FoodOptionsActivity extends AppCompatActivity {
 
-
+    Food food;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,14 +15,17 @@ public class FoodOptionsActivity extends AppCompatActivity {
     }
 
     public void feedSnack(View view){
-        AppConstants.player.feedPet(new Food("Snack", 30));
+        food = new Food("Snack", 30);
+        AppConstants.player.feedPet(food);
     }
 
     public void feedMeal(View view){
-        AppConstants.player.feedPet(new Food("Meal", 60));
+        food = new Food("Snack", 60);
+        AppConstants.player.feedPet(food);
     }
 
     public void feedKingsizedMeal(View view){
-        AppConstants.player.feedPet(new Food("Kingsized Meal", 120));
+        food = new Food("Snack", 120);
+        AppConstants.player.feedPet(food);
     }
 }

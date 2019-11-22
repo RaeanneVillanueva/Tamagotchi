@@ -12,9 +12,10 @@ import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    private boolean bound;
+    private boolean bound = false;
     private GameService gameService;
     private Intent gameServiceIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,9 +24,6 @@ public class MainActivity extends AppCompatActivity {
         if(!bound)
             bindService(gameServiceIntent, mConnection, BIND_AUTO_CREATE);
         startService(gameServiceIntent);
-
-        gameService.startHunger(AppConstants.player.getCurrPet().getTimeUntilHungry());
-
     }
 
     @Override
@@ -41,19 +39,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             GameService.GameBinder binder = (GameService.GameBinder) service;
-            gameService = (binder.getService());
+            gameService = binder.getService();
             bound = true;
-            Log.d(" - SERVICE","ServiceConnection made");
         }
 
-//        @Override
-//        public void onServiceConnected(ComponentName className,
-//                                       IBinder service) {
-//            MusicService.LocalBinder binder = (MusicService.LocalBinder) service;
-//            musicService = (binder.getService());
-//            bound = true;
-//            Log.d(" - SERVICE","ServiceConnection made");
-//        }
 
         @Override
         public void onServiceDisconnected(ComponentName arg0) {
@@ -70,8 +59,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void feed(View view){
+
+        gameService.stopTimer();
         Intent intent = new Intent(this, FoodOptionsActivity.class);
         startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
     }
 
 }
