@@ -9,27 +9,30 @@
     tools:context=".FoodOptionsActivity">
 
     <Button
-        android:id="@+id/btn_snack"
+        android:id="@+id/btn_feedSnack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:text="Snack"
-        android:background="@drawable/button_shape"/>
+        android:background="@drawable/button_shape"
+        android:onClick="feedSnack"/>
 
     <Button
-        android:id="@+id/btn_meal"
+        android:id="@+id/btn_feedMeal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:padding="20dp"
         android:text="Meal"
-        android:background="@drawable/button_shape"/>
+        android:background="@drawable/button_shape"
+        android:onClick="feedMeal"/>
 
     <Button
-        android:id="@+id/btn_kingSized"
+        android:id="@+id/btn_feedKingSized"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:text="King Sized Meal"
-        android:background="@drawable/button_shape"/>
+        android:background="@drawable/button_shape"
+        android:onClick="feedKingsizedMeal"/>
 </LinearLayout>

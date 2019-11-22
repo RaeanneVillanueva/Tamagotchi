@@ -26,16 +26,16 @@ public class Pet {
 
     public void setTimeUntilHungry(int timeUntilHungry) {
         this.timeUntilHungry = timeUntilHungry;
-        if(timeUntilHungry < 30){
+        if(timeUntilHungry < 0){
             petState = petState.HUNGRY;
         }
-        if (timeUntilHungry >= 30) {
+        if (timeUntilHungry >= 0) {
             petState = PetState.FULL;
         }
-        if (timeUntilHungry >= 60) {
+        if (timeUntilHungry >= 30) {
             petState = PetState.VERYFULL;
         }
-        if (timeUntilHungry >= 120) {
+        if (timeUntilHungry >= 60) {
             petState = PetState.BLOATED;
         }
     }

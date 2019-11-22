@@ -7,8 +7,11 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.ProgressBar;
+
 import androidx.core.app.NotificationCompat;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,9 +21,21 @@ import static com.example.tamagotchi.GameBroadcastReceiver.NOTIFICATION_CHANNEL_
 public class GameService extends Service {
 
     private final IBinder gameBind = new GameBinder();
-    private static Timer timer = new Timer();
-    private GameEngine gameEngine = AppConstants.gameEngine;
+    private static Timer timer;
     private Context context;
+
+
+    @Override
+    public void onCreate(){
+        super.onCreate();
+        Log.d("GAMESERVICE", "onCreate()");
+        context = this;
+
+        if(!AppConstants.hasTimer)
+            startTimer();
+    }
+
+
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -30,54 +45,54 @@ public class GameService extends Service {
     @Override
     public void onDestroy(){
         super.onDestroy();
-        gameEngine = null;
-    }
-
-    @Override
-    public void onCreate(){
-        super.onCreate();
-        Log.d("GAMESERVICE", "onCreate()");
-        feed(AppConstants.player.getCurrPet().getTimeUntilHungry());
-        context = this;
     }
 
 
-    public void feed(int seconds) {
+    public void startTimer() {
         int updateInterval = 1000;
-        timer.scheduleAtFixedRate(new updateTask(seconds), 0, updateInterval);
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new updateTask(), 0, updateInterval);
+        AppConstants.hasTimer = true;
     }
 
     public void stopTimer(){
         timer.cancel();
         timer.purge();
+        AppConstants.hasTimer = false;
     }
 
 
 
     private class updateTask extends TimerTask {
-        private int seconds;
-        public updateTask(int seconds){
+        private final static int escape = -120;
+        public updateTask(){
             super();
-            this.seconds = seconds;
         }
 
 
         int i = 0;
         @Override
         public void run(){
+            int seconds = AppConstants.player.getCurrPet().getTimeUntilHungry();
             i++;
-            if(i == seconds) {
-                Log.d("GAMESERVICE","NOTIF");
-
-                //NOTIFY!!!
-                //if hungry
+            AppConstants.player.getCurrPet().setTimeUntilHungry(seconds - 1);
+            if(seconds == 0) {
+                Log.d("GAMESERVICE","PET IS HUNGRY");
                 notify(hungryNotification());
-
-                //if escaped
+            }else if(escape == seconds) {
+                Log.d("GAMESERVICE","PET ESCAPED");
+                AppConstants.player.setCurrPet(null);
                 notify(escapedNotification());
-            }else {
-                Log.d("GAMESERVICE","Time Left: " + (seconds - (i %seconds)));
+                stopTimer();
+            }else{
+                    Log.d("GAMESERVICE","Time Left: " + seconds);
             }
+
+            Intent broadcastIntent = new Intent();
+            broadcastIntent.setAction("UPDATE PROGRESS BAR");
+            broadcastIntent.putExtra("TIMELEFT", seconds);
+            sendBroadcast(broadcastIntent);
+
         }
 
 
@@ -92,8 +107,7 @@ public class GameService extends Service {
                     context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
-                    + 5000, pendingIntent);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), pendingIntent);
         }
 
         //creates a notification if the pet is hungry
@@ -129,6 +143,7 @@ public class GameService extends Service {
         }
 
     }
+
 
     public class GameBinder extends Binder {
         GameService getService(){

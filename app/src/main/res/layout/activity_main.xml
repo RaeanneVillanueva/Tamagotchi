@@ -36,8 +36,8 @@
 
         <ImageView
             android:id="@+id/petView"
-            android:layout_width="350dp"
-            android:layout_height="400dp"
+            android:layout_width="200dp"
+            android:layout_height="250dp"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:background="@drawable/chili"
@@ -57,7 +57,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:fontFamily="@font/cutie"
-            android:text="Feed" />
+            android:text="Feed"
+            android:onClick="feed"/>
 
         <Button
             android:id="@+id/btn_release"
@@ -65,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:fontFamily="@font/cutie"
-            android:text="Release" />
+            android:text="Release"
+            android:onClick="release"/>
     </LinearLayout>
 </LinearLayout>
