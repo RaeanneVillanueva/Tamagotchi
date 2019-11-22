@@ -18,9 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".MainActivity">
 
+
         </activity>
+        <receiver android:name=".GameBroadcastReceiver"></receiver>
+
         <service android:name=".GameService"></service>
     </application>
 
