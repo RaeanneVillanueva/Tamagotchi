@@ -64,7 +64,7 @@ public class GameService extends Service {
 
 
     private class updateTask extends TimerTask {
-        private final static int escape = -10;
+        private final static int escape = -120;
         public updateTask(){
             super();
         }
